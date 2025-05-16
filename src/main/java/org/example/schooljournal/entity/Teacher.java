@@ -1,25 +1,19 @@
-// Student.java
 package org.example.schooljournal.entity;
 
 import jakarta.persistence.*;
 
 @Entity
-public class Student {
-
+public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
     private String surname;
-    private int classNumber;
+    private String subject;
 
-    // klasa szkolna może mieć wielu uczniów, uczeń - jedną klasę szkolną
-    @ManyToOne
-    @JoinColumn(name = "class_id")
-    private SchoolClass schoolClass;
+    // gettery i settery
 
-    // Gettery i settery
     public Long getId() {
         return id;
     }
@@ -44,11 +38,11 @@ public class Student {
         this.surname = surname;
     }
 
-    public int getClassNumber() {
-        return classNumber;
+    public String getSubject() {
+        return subject;
     }
 
-    public void setClassNumber(int classNumber) {
-        this.classNumber = classNumber;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 }
