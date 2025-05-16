@@ -1,5 +1,8 @@
 package org.example.schooljournal.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -8,10 +11,14 @@ public class SchoolClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
     private String name; // 2A, 5C
 
     // każdy uczeń należy do jednej klasy, a klasa może mieć wielu uczniów
     @OneToMany(mappedBy = "schoolClass")
+    @JsonManagedReference
+//    @JsonIgnore
     private List<Student> students;
 
     // gettery i settery:

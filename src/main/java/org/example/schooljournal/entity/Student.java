@@ -1,6 +1,8 @@
 // Student.java
 package org.example.schooljournal.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,11 +14,11 @@ public class Student {
 
     private String name;
     private String surname;
-    private int classNumber;
 
     // klasa szkolna może mieć wielu uczniów, uczeń - jedną klasę szkolną
-    @ManyToOne
-    @JoinColumn(name = "class_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "school_class_id")
+    @JsonBackReference
     private SchoolClass schoolClass;
 
     // Gettery i settery
@@ -44,11 +46,11 @@ public class Student {
         this.surname = surname;
     }
 
-    public int getClassNumber() {
-        return classNumber;
+    public SchoolClass getSchoolClass() {
+        return schoolClass;
     }
 
-    public void setClassNumber(int classNumber) {
-        this.classNumber = classNumber;
+    public void setSchoolClass(SchoolClass schoolClass) {
+        this.schoolClass = schoolClass;
     }
 }
